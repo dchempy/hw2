@@ -238,21 +238,18 @@ puts "Movies"
 puts "======"
 puts ""
 
+# Query the movies data and loop through the results to display the movies output.
+# TODO!
 movies = Movie.all
 
 for movie in movies
-    studio = Studio.where({"id" => movie["studio_id"]})
+    movie_title = movie["title"]
+    release = movie["year_released"]
+    rating = movie["rated"]
+    studio = Studio.find_by({"id" => movie["studio_id"]})
     studio_name = studio["name"]
- #   puts "#{studio_name}"
+    puts "#{movie_title} #{release} #{rating} #{studio_name}"
 end
-
-
-# Batman Begins          2005           PG-13  Warner Bros.
-# The Dark Knight        2008           PG-13  Warner Bros.
-# The Dark Knight Rises  2012           PG-13  Warner Bros.
-
-# Query the movies data and loop through the results to display the movies output.
-# TODO!
 
 # Prints a header for the cast output
 puts ""
@@ -262,3 +259,33 @@ puts ""
 
 # Query the cast data and loop through the results to display the cast output for each movie.
 # TODO!
+
+roles = Role.all
+
+for role in roles
+    movie = Movie.find_by({"id" => role["movie_id"]})
+    movie_title = movie["title"]
+
+    actor = Actor.find_by({"id" => role["actor_id"]})
+    actor_name = actor["name"]    
+
+    role_name = role["character_name"]
+
+    puts "#{movie_title} #{actor_name} #{role_name}"
+end
+
+# Batman Begins          Christian Bale        Bruce Wayne
+# Batman Begins          Michael Caine         Alfred
+# Batman Begins          Liam Neeson           Ra's Al Ghul
+# Batman Begins          Katie Holmes          Rachel Dawes
+# Batman Begins          Gary Oldman           Commissioner Gordon
+# The Dark Knight        Christian Bale        Bruce Wayne
+# The Dark Knight        Heath Ledger          Joker
+# The Dark Knight        Aaron Eckhart         Harvey Dent
+# The Dark Knight        Michael Caine         Alfred
+# The Dark Knight        Maggie Gyllenhaal     Rachel Dawes
+# The Dark Knight Rises  Christian Bale        Bruce Wayne
+# The Dark Knight Rises  Gary Oldman           Commissioner Gordon
+# The Dark Knight Rises  Tom Hardy             Bane
+# The Dark Knight Rises  Joseph Gordon-Levitt  John Blake
+# The Dark Knight Rises  Anne Hathaway         Selina Kyle
