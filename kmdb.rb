@@ -72,6 +72,8 @@
 # TODO!
 Studio.destroy_all
 Movie.destroy_all
+Actor.destroy_all
+Role.destroy_all
 # Generate models and tables, according to the domain model.
 # TODO!
 
@@ -235,6 +237,19 @@ role.save
 puts "Movies"
 puts "======"
 puts ""
+
+movies = Movie.all
+
+for movie in movies
+    studio = Studio.where({"id" => movie["studio_id"]})
+    studio_name = studio["name"]
+ #   puts "#{studio_name}"
+end
+
+
+# Batman Begins          2005           PG-13  Warner Bros.
+# The Dark Knight        2008           PG-13  Warner Bros.
+# The Dark Knight Rises  2012           PG-13  Warner Bros.
 
 # Query the movies data and loop through the results to display the movies output.
 # TODO!
